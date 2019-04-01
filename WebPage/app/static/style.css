@@ -1,0 +1,17 @@
+#table_div{
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+
+.plot-headings{
+	font-size: 25px;
+	font-family: 'Open Sans', 'sans-serif';
+	text-align: center;
+	margin-bottom: 2%;
+}
+
+#data_description{
+	font-size: 20px;
+	font-family: 'Open Sans', 'sans-serif';
+}
