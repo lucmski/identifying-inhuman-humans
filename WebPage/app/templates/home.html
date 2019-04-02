@@ -16,7 +16,9 @@
 
 		<div class = "row">
 			<div class = "col-sm-6">
-				<p id = "data_description">Describe Data Here.</p>
+				<p id = "data_description">
+					We have created a ISIS Twitter dataset which is collection of nearly 30 thousand tweets. Dataset contain 20 features, some of them are hashtag, tweet,userId, user name,location,device used,retweet count, Active since and so on.It took around a month and half to collect the data as there is limitation of fetching data per day therefore we used tweet id to fetch new data every time so that repetition can be avoided .Most of data we collected are against ISIS and their propaganda, but very few supports them which is nearly negligible, as in last  few months ISIS keep lost against kurdish army and was forced out of syria and its effects can be seen on social media,lots of people were tweeting for praising the efforts of army. Twitter handle of ISIS has been significantly reduced in numbers due to strict policies of twitter.
+				</p>
 			</div>
 			<div class = "col-sm-6" id = "table_div">
 				
@@ -79,6 +81,8 @@
 		</script>
 
 		<br>
+
+		<!-- Language Plot -->
 		
 		<p class = "plot-headings">
 			Language Plot
@@ -87,7 +91,9 @@
 		<div class = "row">
 			<div class = "col-sm-6" id = "lang_chart"></div>
 			<div class = "col-sm-6">
-				<p id = "data_description">Describe Plot - 1 Here.</p>
+				<p id = "data_description">
+					Most of the tweets were done in  english language as they wanted to reach out to most of population of the world. So we have sufficient tweets in english for analysis therefore we do not require translation of other tweets.
+				</p>
 			</div>
 		</div>
 
@@ -95,34 +101,297 @@
 
 			var lang_obj = JSON.parse('{{lang | tojson | safe}}');
 
-			var arg_array = [['Language', 'Tweet Count', {role : 'annotation'}, {role: 'style'}]];
+			var lang_arg_array = [['Language', 'Tweet Count', {role : 'annotation'}, {role: 'style'}]];
 
 			for(var i in lang_obj){
 				var arr = [i, lang_obj[i], i, 'color: #76A7FA'];
-				arg_array.push(arr);
+				lang_arg_array.push(arr);
 			}
 			
 			google.charts.load('current', {'packages':['corechart']});
 			google.charts.setOnLoadCallback(drawChart);
 
 			function drawChart(){
-				var data = google.visualization.arrayToDataTable(arg_array);
+				var lang_data = google.visualization.arrayToDataTable(lang_arg_array);
 
 				var options = {
 			        title: "Number of Tweets Per Language",
 			        width: 600,
 			        height: 400,
+			        axes: {
+			            x: {
+			              0: { side: 'top', label: 'Tweet Count'} 
+			            }
+			        },
 			        bar: {groupWidth: "75%"},
-			        legend: { position: "top" },
+			        legend: { position: "none" },
 			    };
 		      	
-		      	var chart = new google.visualization.BarChart(document.getElementById("lang_chart"));
+		      	var lang_chart = new google.visualization.BarChart(document.getElementById("lang_chart"));
 		      	
-		      	chart.draw(data, options);
+		      	lang_chart.draw(lang_data, options);
 
 		    }
 
+		</script>
+
+		<!-- Day Plot -->
+
+		<br>
+		
+		<p class = "plot-headings">
+			Day Plot
+		</p>
+
+		<div class = "row">
+			<div class = "col-sm-6">
+				<p id = "data_description">
+					Most of tweets were done on Saturday and Wednesday this is the result obtained on current data. While observing the pattern throughout the period of collection of data we observed that the days doesn’t matter as keep on changing throughout time of collection of data.
+				</p>
+			</div>
+			<div class = "col-sm-6" id = "day_chart"></div>
+		</div>
+
+		<script type="text/javascript">
+
+			var day_obj = JSON.parse('{{day | tojson | safe}}');
+
+			var day_arg_array = [['Day', 'Tweet Count', {role : 'annotation'}, {role: 'style'}]];
+
+			for(var i in day_obj){
+				var arr = [i, day_obj[i], i, 'color: #76A7FA'];
+				day_arg_array.push(arr);
+			}
+			
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+
+			function drawChart(){
+				var day_data = google.visualization.arrayToDataTable(day_arg_array);
+
+				var options = {
+			        title: "Day Wise Tweets",
+			        width: 600,
+			        height: 400,
+			        bar: {groupWidth: "75%"},
+			        legend: { position: "none" },
+			    };
+		      	
+		      	var day_chart = new google.visualization.BarChart(document.getElementById("day_chart"));
+		      	
+		      	day_chart.draw(day_data, options);
+
+		    }
 
 		</script>
+
+		<!-- Device Plot -->
+
+		<br>
+		
+		<p class = "plot-headings">
+			Devices Used Plot
+		</p>
+
+		<div class = "row">
+			<div class = "col-sm-6" id = "device_chart"></div>
+			<div class = "col-sm-6">
+				<p id = "data_description">
+					Most of used devices for tweeting on ISIS is of category others that (tweets through iPhones, Blackberry , Symbian devices).While Android devices singularly is used mostly.
+				</p>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+
+			var device_obj = JSON.parse('{{device | tojson | safe}}');
+
+			var device_arg_array = [['Device Used', 'Tweet Count', {role : 'annotation'}, {role: 'style'}]];
+
+			for(var i in device_obj){
+				var arr = [i, device_obj[i], i, 'color: #76A7FA'];
+				device_arg_array.push(arr);
+			}
+			
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+
+			function drawChart(){
+				var device_data = google.visualization.arrayToDataTable(device_arg_array);
+
+				var options = {
+			        title: "Devices Used for Tweets",
+			        width: 600,
+			        height: 400,
+			        bar: {groupWidth: "75%"},
+			        legend: { position: "none" },
+			    };
+		      	
+		      	var device_chart = new google.visualization.BarChart(document.getElementById("device_chart"));
+		      	
+		      	device_chart.draw(device_data, options);
+
+		    }
+
+		</script>
+
+		<!-- Country Chart -->
+
+		<br>
+
+		<p class = "plot-headings">
+			Country Plot
+		</p>
+
+		<div class = "row">
+			<div class = "col-sm-6">
+				<p id = "data_description">
+					Most of countries through which Tweets were done are CtrlSec which is Hacker Group also goes by the name anonymous. They tweets in against of ISIS and help out in suspending twitter accounts by notifying to Twitter about ISIS Twitter accounts which are used for radicalization and recruitment. And Israel is country through which most of tweets are done on ISIS.
+				</p>
+			</div>
+			<div class = "col-sm-6" id = "country_chart"></div>
+		</div>
+		
+		<script type="text/javascript">
+
+  			var country_obj = JSON.parse('{{country | tojson | safe }}');
+
+  			var country_arg_arr = [['Location', 'Tweet Count']]
+
+  			for(var i in country_obj){
+  				var arr = [i, country_obj[i]];
+  				country_arg_arr.push(arr);
+  			}
+
+  			google.charts.load("current", {packages:["corechart"]});
+  			google.charts.setOnLoadCallback(drawChart);
+
+  			function drawChart(){
+  				var country_data = google.visualization.arrayToDataTable(country_arg_arr);
+
+  				var options = {
+  					title: "Users Locations",
+  					is3d: true,
+  				};
+
+  				var country_chart = new google.visualization.PieChart(document.getElementById('country_chart'));
+
+  				country_chart.draw(country_data, options);
+  			}
+
+  		</script>
+
+  		<!-- Sentiment Table -->
+
+		<br>
+
+		<p class = "plot-headings">
+			User Activity Plot
+		</p>
+
+		<div class = "row">
+			<div class = "col-sm-3" id = "most_chart"></div>
+			<div class = "col-sm-3" id = "least_chart"></div>
+			<div class = "col-sm-6">
+				<p id = "data_description">
+					Most Active users Hananya Naftali which tweets most on ISIS. Most of the tweets from this user were against ISIS, precisely they were about the celebration by Kurdish Army when they drove out ISIS Levant from their strongholds in Syria.
+				</p>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+
+			var most_active = JSON.parse('{{most | tojson | safe}}');
+			var least_active = JSON.parse('{{least | tojson | safe}}');
+
+			var most_args_arr = [['Screen Name', 'Tweet Count']];
+			var least_args_arr = [['Screen Name', 'Tweet Count']];
+
+			for(var i in most_active){
+				var most_arr = [i, most_active[i]]
+				most_args_arr.push(most_arr)
+			}
+
+			for(var i in least_active){
+				var least_arr = [i, least_active[i]]
+				least_args_arr.push(least_arr)
+			}
+
+			// Load google charts
+	      	google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+
+
+			function drawChart(){
+
+		        var most_data = google.visualization.arrayToDataTable(most_args_arr);
+		        var least_data = google.visualization.arrayToDataTable(least_args_arr);
+		        var most_options = {
+		        	title: "Most Active Users",
+		        	height: 700,
+		        	width: 700,
+		        };
+
+		        var least_options = {
+		        	title: "Least Active Users",
+		        	height: 700,
+		        	width: 500,
+		        };
+
+		        var most_chart = new google.visualization.LineChart(document.getElementById('most_chart'));
+
+		        var least_chart = new google.visualization.LineChart(document.getElementById('least_chart'));
+
+		        most_chart.draw(most_data, most_options);
+
+		        // least_chart.draw(least_data, least_options);
+
+			}
+
+		</script>	
+
+		<br>
+
+		<p class = "plot-headings">
+			Hashtag Word Cloud
+		</p>
+
+		<div class = "row">
+
+			<div class = "col-sm-12" id = "hashtag_cloud" align="center">
+				<img src = "/static/hashtag.png" height="500" width="1000" >
+			</div>
+		</div>
+
+		<br>
+
+		<p class = "plot-headings">
+			Tweet Word Cloud
+		</p>
+
+		<div class = "row">
+
+			<div class = "col-sm-12" id = "hashtag_cloud" align="center">
+				<img src = "/static/tweet_cloud.png" height="500" width="1000" >
+			</div>
+		</div>
+
+		<br>
+
+		<p class = "plot-headings">
+			User Mention Word Cloud
+		</p>
+
+		<div class = "row">
+
+			<div class = "col-sm-12" id = "hashtag_cloud" align="center">
+				<img src = "/static/user_mention.png" height="500" width="1000" >
+			</div>
+		</div>	
+
+		<br>
+		<br>
+		<br>
+
 
 {% endblock %}
