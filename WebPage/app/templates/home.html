@@ -10,6 +10,23 @@
 
 		<br>
 
+		<h3>Prologue</h3>
+
+		<p id = "data_description">
+			In today's world, the thought of going through a day without checking notifications from social media platforms is nearly impossible. Social Media has changed the way we connect and interact with the world. Platforms like Twitter, operate with a simple principle, i.e. open for all, no bias towards anyone, almost like ideal equality. <br>
+
+			The fact that anyone can write about anything to anyone whilst sitting in the comfort of one's home, struggling in office or while in commute, has both a good and a bad side to it.<br>
+
+			Terror groups lke ISIS have been active on Twitter since 2014, the time they captured parts of Syria. They use Twitter to spread hatred, radicalize people and recruit new so called 'soldiers'. An astonishing news came to light in December 2014, when an ordinary Software Engineer in Bangalore Shammi Witness was involved with ISIS, helping them by radicalizing and recruiting people. Astonishing thing about this is that he was doing so openly, without hiding his identity, not using any coded tweets. <br>
+
+			The outreach of such platfroms is worldwide, and thus one can influence masses using such platforms. Cases like Shammi Witness manier times are overlooked or don't come to light.
+			<br>
+
+			With this project we tried to make use of our technical knowledge and apply it to tackle this problem.
+		</p>
+
+		<br>
+
 		<p class = "plot-headings">
 			Here's what a subset of the data looks like:
 		</p>
@@ -17,7 +34,37 @@
 		<div class = "row">
 			<div class = "col-sm-6">
 				<p id = "data_description">
-					We have created a ISIS Twitter dataset which is collection of nearly 30 thousand tweets. Dataset contain 20 features, some of them are hashtag, tweet,userId, user name,location,device used,retweet count, Active since and so on.It took around a month and half to collect the data as there is limitation of fetching data per day therefore we used tweet id to fetch new data every time so that repetition can be avoided .Most of data we collected are against ISIS and their propaganda, but very few supports them which is nearly negligible, as in last  few months ISIS keep lost against kurdish army and was forced out of syria and its effects can be seen on social media,lots of people were tweeting for praising the efforts of army. Twitter handle of ISIS has been significantly reduced in numbers due to strict policies of twitter.
+					<!-- We have created a ISIS Twitter dataset which is collection of nearly 30 thousand tweets. Dataset contain 20 features, some of them are hashtag, tweet,userId, user name,location,device used,retweet count, Active since and so on.It took around a month and half to collect the data as there is limitation of fetching data per day therefore we used tweet id to fetch new data every time so that repetition can be avoided .Most of data we collected are against ISIS and their propaganda, but very few supports them which is nearly negligible, as in last  few months ISIS keep lost against kurdish army and was forced out of syria and its effects can be seen on social media,lots of people were tweeting for praising the efforts of army. Twitter handle of ISIS has been significantly reduced in numbers due to strict policies of twitter. -->
+
+					This project was started not only with the aim of analytics but also dataset creation. It may be considered as not so fancy work, but it is the heart of all analytics and machine learning. Thus, initial weeks were spent in data collection.<br>
+
+					We collected real time data in a span of 1 month to 1.5 month. The data is mainly from the hashtags on Twitter like '#ISIS', '#Jihaad', '#ISIL', etc.<br>
+
+					Data collection is done using Twitter API, cosidering the rate limiting, we were able to collect 45K tweets with 20 dimensions, i.e. effectively we ended up with a 45,000 x 20 matrix. It is of considerable size to do some analysis, and thus from this point onwards we moved our focus from data collection, preprocessing, cleaning and formating towards analytics.<br>
+
+					On the right, you can get a glimpse of data. Notice, how clean and well formatted it is. Justice is done to this step!<br>
+
+					Features: <br>
+					Date Time <br>
+					Location <br>
+					Geo Tag <br>
+					Tweet ID <br>
+					Language <br>
+					Hashtags <br>
+					User Mentions <br>
+					Retweet Count <br>
+					Tweet Favorite Count <br>
+					Device <br>
+					User ID <br>
+					User Name <br>
+					Screen Name <br>
+					Active Since <br>
+					Tweet Count <br>
+					Verification Status <br>
+					Followers Count <br>
+					Following Count <br>
+					URL <br>
+					Full Text
 				</p>
 			</div>
 			<div class = "col-sm-6" id = "table_div">
@@ -27,8 +74,6 @@
 
  		<!-- Data -->
 		<script type="text/javascript">
-
-			var x = JSON.parse('{{cols | tojson | safe}}');
 
 
 			// Load google charts
@@ -57,9 +102,7 @@
 				data.addColumn('string', "{{cols.16}}");
 				data.addColumn('string', "{{cols.17}}");
 				data.addColumn('string', "{{cols.18}}");
-				data.addColumn('string', "{{cols.19}}");
-
-				
+				data.addColumn('string', "{{cols.19}}");				
 
 				data.addRows([
 					["{{rows.0.0}}", "{{rows.0.1}}", "{{rows.0.2}}", "{{rows.0.3}}", "{{rows.0.4}}", "{{rows.0.5}}","{{rows.0.6}}", "{{rows.0.7}}", "{{rows.0.8}}", "{{rows.0.9}}", "{{rows.0.10}}", "{{rows.0.11}}", "{{rows.0.12}}", "{{rows.0.13}}" ,"{{rows.0.14}}", "{{rows.0.15}}", "{{rows.0.16}}", "{{rows.0.17}}", "{{rows.0.18}}" ,"{{rows.0.19}}"],
@@ -92,7 +135,12 @@
 			<div class = "col-sm-6" id = "lang_chart"></div>
 			<div class = "col-sm-6">
 				<p id = "data_description">
-					Most of the tweets were done in  english language as they wanted to reach out to most of population of the world. So we have sufficient tweets in english for analysis therefore we do not require translation of other tweets.
+<!-- 					Most of the tweets were done in  english language as they wanted to reach out to most of population of the world. So we have sufficient tweets in english for analysis therefore we do not require translation of other tweets. -->
+					Talking about Syria, Islamic State the first thing comes to mind is 'Wouldn't there be a language problem while analysing the tweets?'. We had the same doubt, so to burst this bubble the first plot we did (litterally) is the language of tweets. Fortunately, a shocking amount of tweets were in English. Phew!<br><br>
+
+					This did take up the burdern away from our shoulders, or did it? Now what lies ahead is a bunch of plots signifying some or the other thing. You still with us?<br><br>
+
+					Don't worry, we have tried to make the further read interesting.
 				</p>
 			</div>
 		</div>
@@ -146,7 +194,13 @@
 		<div class = "row">
 			<div class = "col-sm-6">
 				<p id = "data_description">
-					Most of tweets were done on Saturday and Wednesday this is the result obtained on current data. While observing the pattern throughout the period of collection of data we observed that the days doesn’t matter as keep on changing throughout time of collection of data.
+					<!-- Most of tweets were done on Saturday and Wednesday this is the result obtained on current data. While observing the pattern throughout the period of collection of data we observed that the days doesn’t matter as keep on changing throughout time of collection of data. -->
+					Ohkay!, so let's begin.<br><br>
+					Let's take a simple metric and see if anything interesting comes out. This was the mindset we had when we plotted the thing which you can see on the right.<br><br>
+					Interestingly so, we did find out that ISIS supporters and anti-ISIS aren't bias towards the day of the week. Saturday witnessed as much tweets as Wednesday. 
+
+					<br><br> Enough fun and games, let's get serious, shall we?
+
 				</p>
 			</div>
 			<div class = "col-sm-6" id = "day_chart"></div>
@@ -197,7 +251,11 @@
 			<div class = "col-sm-6" id = "device_chart"></div>
 			<div class = "col-sm-6">
 				<p id = "data_description">
-					Most of used devices for tweeting on ISIS is of category others that (tweets through iPhones, Blackberry , Symbian devices).While Android devices singularly is used mostly.
+					<!-- Most of used devices for tweeting on ISIS is of category others that (tweets through iPhones, Blackberry , Symbian devices).While Android devices singularly is used mostly. -->
+
+					Now we do some real analysis. The plot on the left is between the devices used and tweets done using those devices. It can be inferred from the plot that Twitter Web Client is predominantly used for tweeting. Other devices lke iPhones, Android even Blackberry were used in some cases.<br><br>
+
+					A naive assumption can be made, that ISIS has some people who have some amount of technical knowledge. Overtime, we have seen a rise in the numbers for 'Android'.
 				</p>
 			</div>
 		</div>
@@ -240,13 +298,22 @@
 		<br>
 
 		<p class = "plot-headings">
-			Country Plot
+			Location Plot
 		</p>
 
 		<div class = "row">
 			<div class = "col-sm-6">
 				<p id = "data_description">
-					Most of countries through which Tweets were done are CtrlSec which is Hacker Group also goes by the name anonymous. They tweets in against of ISIS and help out in suspending twitter accounts by notifying to Twitter about ISIS Twitter accounts which are used for radicalization and recruitment. And Israel is country through which most of tweets are done on ISIS.
+					<br>
+					<br>
+					<br>
+					<br>
+					<!-- <br> -->
+					<!-- <br> -->
+					 Most of countries through which Tweets were done are CtrlSec which is Hacker Group also goes by the name anonymous. They tweets in against of ISIS and help out in suspending twitter accounts by notifying to Twitter about ISIS Twitter accounts which are used for radicalization and recruitment.<br><br> One more interesting things pops out here is that, count of tweets from Syria are far less than many other countries as Israel, USA(Washington DC), hence, we can conclude on it that ISIS is not a local problem of Syria, it is global problem.
+<br>
+	<br>
+					 Lets see few other analysis....
 				</p>
 			</div>
 			<div class = "col-sm-6" id = "country_chart"></div>
@@ -281,36 +348,37 @@
 
   		</script>
 
-  		<!-- Sentiment Table -->
+  		<!-- User Activity line Plot -->
 
 		<br>
 
 		<p class = "plot-headings">
-			User Activity Plot
+			User Activity Plots
 		</p>
 
 		<div class = "row">
-			<div class = "col-sm-3" id = "most_chart"></div>
-			<div class = "col-sm-3" id = "least_chart"></div>
+			<div class = "col-sm-6" id = "least_chart"></div>
 			<div class = "col-sm-6">
 				<p id = "data_description">
-					Most Active users Hananya Naftali which tweets most on ISIS. Most of the tweets from this user were against ISIS, precisely they were about the celebration by Kurdish Army when they drove out ISIS Levant from their strongholds in Syria.
+					<br>
+					<br>
+					<br>
+					This plot tell us that, how many users are tweeting how much about ISIS, we had restricted this graph, to some count of tweets, just for the sake of simplicity, as plotting it beyond that won't make any better inference.
+					<br>
+					<br>
+					From this plot we can get the inference that only few user are producing most of the content, in our case it is tweets, rest of the user are not very active in posting tweets, they do it very raerly, as we can see here that 18000 users had tweeted  only one tweet, which clearly justifies the 'Power Law', which states that only 20% of user generate massive data, rest 80% just views that data, instead of generating any new data.
+					<br>
+					<br>We will go further in it, with next plot....
+
 				</p>
 			</div>
 		</div>
 
 		<script type="text/javascript">
 
-			var most_active = JSON.parse('{{most | tojson | safe}}');
 			var least_active = JSON.parse('{{least | tojson | safe}}');
 
-			var most_args_arr = [['Screen Name', 'Tweet Count']];
-			var least_args_arr = [['Screen Name', 'Tweet Count']];
-
-			for(var i in most_active){
-				var most_arr = [i, most_active[i]]
-				most_args_arr.push(most_arr)
-			}
+			var least_args_arr = [['User Count', 'Tweet Count']];
 
 			for(var i in least_active){
 				var least_arr = [i, least_active[i]]
@@ -324,31 +392,265 @@
 
 			function drawChart(){
 
-		        var most_data = google.visualization.arrayToDataTable(most_args_arr);
 		        var least_data = google.visualization.arrayToDataTable(least_args_arr);
+
+		        var least_options = {
+		        	title: "User Activity (Pareto Law)",
+		        	height: 700,
+		        	width: 700,
+		        	vAxis: {title: "Tweet Count"},
+		        	hAxis: {title: "User Count"},
+		        };
+
+		        var least_chart = new google.visualization.LineChart(document.getElementById('least_chart'));
+
+		        least_chart.draw(least_data, least_options);
+
+			}
+
+		</script>
+
+
+		<br>
+
+		<div class = "row">
+			<div class = "col-sm-6">
+				<p id = "data_description">
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					In this plot we will get to know the most active users, there are for most active users, in rest of the users, few are active on medium level, and others are very less active in tweeting any tweet, they may be active on reading, liking, sharing, etc., but they don't post tweet that much actively.  
+				</p>
+			</div>
+			<div class = "col-sm-6" id = "most_chart"></div>
+		</div>
+
+		<script type="text/javascript">
+
+			var most_active = JSON.parse('{{most | tojson | safe}}');
+
+			var most_args_arr = [['Screen Name', 'Tweet Count']];
+
+			for(var i in most_active){
+				var most_arr = [i, most_active[i]]
+				most_args_arr.push(most_arr)
+			}
+
+			// Load google charts
+	      	google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+
+
+			function drawChart(){
+
+		        var most_data = google.visualization.arrayToDataTable(most_args_arr);
 		        var most_options = {
 		        	title: "Most Active Users",
 		        	height: 700,
 		        	width: 700,
-		        };
-
-		        var least_options = {
-		        	title: "Least Active Users",
-		        	height: 700,
-		        	width: 500,
+		        	vAxis: {title: "Tweet Count"},
+		        	hAxis: {title: "Screen Name"},
 		        };
 
 		        var most_chart = new google.visualization.LineChart(document.getElementById('most_chart'));
 
-		        var least_chart = new google.visualization.LineChart(document.getElementById('least_chart'));
-
 		        most_chart.draw(most_data, most_options);
-
-		        // least_chart.draw(least_data, least_options);
 
 			}
 
 		</script>	
+
+		<!-- Sentiment Score -->
+
+		<br>
+
+		<p class = "plot-headings">
+			Sentiment Score
+		</p>
+
+		<div class = "row">
+			<div class = "col-sm-4" id = "pos_chart"></div>
+			<div class = "col-sm-4">
+				<p id = "data_description">
+					Most of countries through which Tweets were done are CtrlSec which is Hacker Group also goes by the name anonymous. They tweets in against of ISIS and help out in suspending twitter accounts by notifying to Twitter about ISIS Twitter accounts which are used for radicalization and recruitment. And Israel is country through which most of tweets are done on ISIS.
+				</p>
+			</div>
+			<div class = "col-sm-4" id = "neg_chart"></div>
+		</div>
+
+
+		<script type="text/javascript">
+
+			var sent_pos = JSON.parse('{{sent_pos | tojson | safe}}');
+			var sent_neg = JSON.parse('{{sent_neg | tojson | safe}}');
+			var count_pos = JSON.parse('{{count_pos | tojson | safe}}');
+			var count_neg = JSON.parse('{{count_neg | tojson | safe}}');
+
+			var pos_args_arr = [];
+			var neg_args_arr = [];
+			
+			for(var i in count_pos){
+				var pos_arr = [i, count_pos[i]];
+				pos_args_arr.push(pos_arr)
+			}
+
+			var j = 0;
+			for(var i in sent_pos){
+				var x = pos_args_arr[j];
+				x.push(sent_pos[i]);
+				pos_args_arr[j] = x
+				j += 1
+			}
+
+
+			for(var i in count_neg){
+				var neg_arr = [i, count_neg[i]];
+				neg_args_arr.push(neg_arr)
+			}
+
+			var j = 0;
+			for(var i in sent_neg){
+				var x = neg_args_arr[j];
+				x.push(sent_neg[i]);
+				neg_args_arr[j] = x
+				j += 1
+			}
+
+
+			// Load google charts
+			google.charts.load('current', {'packages':['table']});
+			google.charts.setOnLoadCallback(drawChart);
+
+			function drawChart(){
+
+				var pos_sent_data = new google.visualization.DataTable();
+				var neg_sent_data = new google.visualization.DataTable();
+
+				pos_sent_data.addColumn('string', 'Screen Name')
+				pos_sent_data.addColumn('string', 'Tweet Count')
+				pos_sent_data.addColumn('number', 'Sentiment Score')
+
+				neg_sent_data.addColumn('string', 'Screen Name')
+				neg_sent_data.addColumn('string', 'Tweet Count')
+				neg_sent_data.addColumn('number', 'Sentiment Score')
+				
+
+				pos_sent_data.addRows(pos_args_arr)
+
+				neg_sent_data.addRows(neg_args_arr)
+
+				var pos_sent_table = new google.visualization.Table(document.getElementById('pos_chart'));
+
+				var neg_sent_table = new google.visualization.Table(document.getElementById('neg_chart'));
+
+		        pos_sent_table.draw(pos_sent_data, {showRowNumber: true, width: '100%', height: '500px'});
+
+		        neg_sent_table.draw(neg_sent_data, {showRowNumber: true, width: '100%', height: '500px'});
+
+			}
+
+		</script>
+
+		<!-- Age Plot -->
+
+		<br>
+
+		<p class = "plot-headings">
+			Age Plot
+		</p>
+
+		<div class = "row">
+			<div class = "col-sm-6">
+				<p id = "data_description">
+					Most of countries through which Tweets were done are CtrlSec which is Hacker Group also goes by the name anonymous. They tweets in against of ISIS and help out in suspending twitter accounts by notifying to Twitter about ISIS Twitter accounts which are used for radicalization and recruitment. And Israel is country through which most of tweets are done on ISIS.
+				</p>
+			</div>
+			<div class = "col-sm-6" id = "age_chart"></div>
+		</div>
+		
+		<script type="text/javascript">
+
+  			var age_obj = JSON.parse('{{age | tojson | safe }}');
+
+  			var age_arg_arr = [['Age Group', 'Tweet Count']]
+
+  			for(var i in age_obj){
+  				var arr = [i, age_obj[i]];
+  				age_arg_arr.push(arr);
+  			}
+
+  			google.charts.load("current", {packages:["corechart"]});
+  			google.charts.setOnLoadCallback(drawChart);
+
+  			function drawChart(){
+  				var age_data = google.visualization.arrayToDataTable(age_arg_arr);
+
+  				var options = {
+  					title: "Users Age Group",
+  					is3d: true,
+  				};
+
+  				var age_chart = new google.visualization.PieChart(document.getElementById('age_chart'));
+
+  				age_chart.draw(age_data, options);
+  			}
+
+  		</script>
+
+  		<!-- Gender Plot -->
+
+		<br>
+
+		<p class = "plot-headings">
+			Gender Plot
+		</p>
+
+		<div class = "row">
+			<div class = "col-sm-6" id = "gender_chart"></div>
+			<div class = "col-sm-6">
+				<p id = "data_description">
+					Most of countries through which Tweets were done are CtrlSec which is Hacker Group also goes by the name anonymous. They tweets in against of ISIS and help out in suspending twitter accounts by notifying to Twitter about ISIS Twitter accounts which are used for radicalization and recruitment. And Israel is country through which most of tweets are done on ISIS.
+				</p>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+
+  			var gender_obj = JSON.parse('{{gender | tojson | safe }}');
+
+  			var gender_arg_arr = [['Gender', 'Tweet Count']]
+
+  			for(var i in gender_obj){
+  				var arr = [i, gender_obj[i]];
+  				gender_arg_arr.push(arr);
+  			}
+
+  			google.charts.load("current", {packages:["corechart"]});
+  			google.charts.setOnLoadCallback(drawChart);
+
+  			function drawChart(){
+  				var gender_data = google.visualization.arrayToDataTable(gender_arg_arr);
+
+  				var options = {
+  					title: "Users Gender",
+  					is3d: true,
+  				};
+
+  				var gender_chart = new google.visualization.PieChart(document.getElementById('gender_chart'));
+
+  				gender_chart.draw(gender_data, options);
+  			}
+
+  		</script>
+
+  		<!-- Wordclouds -->
 
 		<br>
 
@@ -359,7 +661,7 @@
 		<div class = "row">
 
 			<div class = "col-sm-12" id = "hashtag_cloud" align="center">
-				<img src = "/static/hashtag.png" height="500" width="1000" >
+				<img src = "/static/hashtag.png" height="800" width="800" >
 			</div>
 		</div>
 
@@ -372,7 +674,7 @@
 		<div class = "row">
 
 			<div class = "col-sm-12" id = "hashtag_cloud" align="center">
-				<img src = "/static/tweet_cloud.png" height="500" width="1000" >
+				<img src = "/static/tweet_cloud.png" height="800" width="1000" >
 			</div>
 		</div>
 
@@ -385,7 +687,7 @@
 		<div class = "row">
 
 			<div class = "col-sm-12" id = "hashtag_cloud" align="center">
-				<img src = "/static/user_mention.png" height="500" width="1000" >
+				<img src = "/static/user_mention.png" height="800" width="800" >
 			</div>
 		</div>	
 

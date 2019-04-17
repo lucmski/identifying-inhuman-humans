@@ -11,6 +11,11 @@ def get_sentiment_analysis(data):
 	sentiment_pos = {}
 	sentiment_neg = {}
 
+	name_sent_pos = {}
+	name_count_pos = {}
+	name_sent_neg = {}
+	name_count_neg = {}
+
 	for i in unique_ids:
 		try:
 			su = 0
@@ -34,16 +39,34 @@ def get_sentiment_analysis(data):
 	for key, value in sorted(sentiment_neg.items(), key = operator.itemgetter(1), reverse=True):
 		sentiment_pos[key] = [value[0], value[1]]
 
-	return sentiment_pos, sentiment_neg
+
+	for key in sentiment_pos.keys():
+		name_count_pos[key] = sentiment_pos[key][1]
+		name_sent_pos[key] = sentiment_pos[key][0]
+
+	for key in sentiment_neg.keys():
+		name_count_neg[key] = sentiment_neg[key][1]
+		name_sent_neg[key] = sentiment_neg[key][0]
 
 
-sent_pos, sent_neg = get_sentiment_analysis(data)
+	return name_sent_pos, name_count_pos, name_sent_neg, name_count_neg
 
-sort_pos = sorted(sent_pos.items(), key = operator.itemgetter(1), reverse = True)
-sort_neg = sorted(sent_neg.items(), key = operator.itemgetter(1))
 
-with open('sentiment_pos.pkl', 'wb') as f:
-	pkl.dump(sort_pos, f)
+name_sent_pos, name_count_pos, name_sent_neg, name_count_neg = get_sentiment_analysis(data)
 
-with open('sentiment_neg.pkl', 'wb') as f:
-	pkl.dump(sort_neg, f)
+name_sent_pos_sort = sorted(name_sent_pos.items(), key = operator.itemgetter(1), reverse = True)
+name_count_pos_sort = sorted(name_count_pos.items(), key = operator.itemgetter(1), reverse = True)
+name_sent_neg_sort = sorted(name_sent_neg.items(), key = operator.itemgetter(1))
+name_count_neg_sort = sorted(name_count_neg.items(), key = operator.itemgetter(1))
+
+with open('name_sent_pos.pkl', 'wb') as f:
+	pkl.dump(name_sent_pos_sort, f)
+
+with open('name_count_pos.pkl', 'wb') as f:
+	pkl.dump(name_count_pos_sort, f)
+
+with open('name_sent_neg.pkl', 'wb') as f:
+	pkl.dump(name_sent_neg_sort, f)
+
+with open('name_count_neg.pkl', 'wb') as f:
+	pkl.dump(name_count_neg_sort, f)

@@ -63,37 +63,69 @@ def get_country_analysis(data):
 
 def get_sentiment_analysis():
 
+	name_sent_pos = {}
+	name_sent_neg = {}
+	name_count_pos = {}
+	name_count_neg = {}
 	sent_pos = {}
 	sent_neg = {}
+	count_pos = {}
+	count_neg = {}
 
-	with open('./app/static/sentiment_pos.pkl', 'rb') as f:
-		sentiment_pos = pkl.load(f)
+	with open('./app/static/name_sent_pos.pkl', 'rb') as f:
+		n_s_p = pkl.load(f)
 
-	with open('./app/static/sentiment_neg.pkl', 'rb') as f:
-		sentiment_neg = pkl.load(f)
+	with open('./app/static/name_count_pos.pkl', 'rb') as f:
+		n_c_p = pkl.load(f)
+
+	with open('./app/static/name_sent_neg.pkl', 'rb') as f:
+		n_s_n = pkl.load(f)
+
+	with open('./app/static/name_count_neg.pkl', 'rb') as f:
+		n_c_n = pkl.load(f)
 
 	for i in range(10):
-		sent_pos[sentiment_pos[i][0]] = [sentiment_pos[i][1][0], sentiment_pos[i][1][1]]
-		sent_neg[sentiment_neg[i][0]] = [sentiment_neg[i][1][0], sentiment_neg[i][1][1]]
+		sent_pos[n_s_p[i][0]] = n_s_p[i][1]
+		sent_neg[n_s_n[i][0]] = n_s_n[i][1]
 
-	return sent_pos, sent_neg
+	for i in range(len(n_c_p)):
+		name_count_pos[n_c_p[i][0]] = n_c_p[i][1]
+
+	for i in range(len(n_c_n)):
+		name_count_neg[n_c_n[i][0]] = n_c_n[i][1]
+
+	for key in sent_pos.keys():
+		count_pos[key] = str(name_count_pos[key])
+
+	for key in sent_neg.keys():
+		count_neg[key] = str(name_count_neg[key])
+
+	return sent_pos, sent_neg, count_pos, count_neg
+
+
+def get_least_activity(data, user_activity):
+	count_dict = {}
+
+	for key in user_activity:
+		if user_activity[key] <= 15 and user_activity[key] >= 1:
+			if user_activity[key] not in count_dict.keys():
+				count_dict[user_activity[key]] = 1
+			else:
+				count_dict[user_activity[key]] += 1
+	return count_dict
 
 
 def get_user_activity(data):
 	user_activity = {}
 	most_active = {}
-	least_active = {}
 	for name in data['Screen Name']:
 		if name not in user_activity.keys():
 			user_activity[name] = 1
 		else:
 			user_activity[name] += 1
-	i = 0
-	for key, val in sorted(user_activity.items(), key = operator.itemgetter(1)):
-		least_active[key] = val
-		i += 1
-		if i > 15:
-			break
+
+	least_active = get_least_activity(data, user_activity)
+
 	i = 0
 	for key, val in sorted(user_activity.items(), key = operator.itemgetter(1), reverse = True):
 		most_active[key] = val
@@ -104,6 +136,32 @@ def get_user_activity(data):
 	return most_active, least_active
 
 
+def get_age_analysis(data):
+	
+	age_dict = {}
+	
+	for i in data['age_group']:
+		if i not in age_dict.keys():
+			age_dict[i] = 1
+		else:
+			age_dict[i] += 1
+
+	return age_dict
+
+def get_gender_analysis(data):
+	gender_dict = {'Undefined': 0, 'Male':0, 'Female': 0}
+
+	print(data['gender'].unique())
+
+	for i in data['gender']:
+		if i is None:
+			gender_dict['Undefined'] += 1
+		else:
+			gender_dict[i] += 1
+
+	return gender_dict
+
+
 
 @app.route('/index')
 @app.route('/home')
@@ -111,7 +169,8 @@ def get_user_activity(data):
 def index():
 	k = 0
 	data = pd.read_csv('./app/static/new_isis_tweets.csv')
-	# age_data = pd.read_csv('./app/static/')
+	age_data = pd.read_csv('./app/static/age_group.csv')
+	gender_data = pd.read_csv('./app/static/gender_isis.csv').dropna()
 	data_rows = {}
 	data_cols = {}
 	for i in data.keys():
@@ -129,11 +188,16 @@ def index():
 	devices_dict = get_device_analysis(data)
 
 	country_dict = get_country_analysis(data)
+
+	sent_pos, sent_neg, count_pos, count_neg = get_sentiment_analysis()
 	
-	# sentiment_dict_pos, sentiment_dict_neg = get_sentiment_analysis()
 	most_active, least_active = get_user_activity(data)
 
+	age_dict = get_age_analysis(age_data)
 
+	gender_dict = get_gender_analysis(gender_data)
 
 	return render_template('home.html', cols=data_cols, rows=data_rows, lang=lang_data, day=day_dict, \
-		device=devices_dict, country=country_dict, most=most_active, least=least_active)
+		device=devices_dict, country=country_dict, most=most_active, least=least_active, \
+		sent_pos=sent_pos, count_pos=count_pos, sent_neg=sent_neg, count_neg=count_neg, age=age_dict, \
+		gender=gender_dict)
